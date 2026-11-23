@@ -78,4 +78,32 @@ final class EstoqueService
             return $ingrediente;
         }, attempts: 3);
     }
+
+    private function garantirTipoCompativel(Compartimento $comp, TipoIngrediente $tipo, string $hoje): void
+    {
+        if($comp->tipo_atual === null || $comp->tipo_atual === $tipo){
+            return;
+        }
+
+        if(bccomp($comp->quantidade_atual, '0', 3) > 0) {
+            throw TipoIncompativelException::para($comp, $tipo);
+        }
+
+        if($comp->tipo_definido_em?->toDateString() === $hoje) {
+            throw CompartimentoTravadoNoDiaException::para($comp, $tipo);
+        }
+    }
+
+    private function registrarHistorico(Ingrediente $i, TipoOperacao $op, string $qtd, string $responsavel): void
+    {
+        Movimentacao::create([
+            'ingrediente_id' => $i->id,
+            'compartimento_id' => $i->compartimento_id,
+            'operacao' => $op,
+            'tipo_ingrediente' => $i->tipo,
+            'quantidade' => $qtd,
+            'responsavel' => $responsavel,
+            'occurred_at' => now(),
+        ]);
+    }
 }
