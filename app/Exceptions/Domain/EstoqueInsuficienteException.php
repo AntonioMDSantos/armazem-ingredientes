@@ -16,8 +16,9 @@ final class EstoqueInsuficienteException extends RegraDeNegocioException
             $i->nome,
             $c->codigo,
             $i->quantidade,
-            $i->tipo->unidade(),
+            $unidade,
             $solicitado,
+            $unidade,
         ));
     }
 

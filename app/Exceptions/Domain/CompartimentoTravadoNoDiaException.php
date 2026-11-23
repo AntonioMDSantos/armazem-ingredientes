@@ -13,7 +13,9 @@ final class CompartimentoTravadoNoDiaException extends RegraDeNegocioException
             '%s recebeu %s em %s e só pode receber %s a partir de %s.',
             $c->codigo,
             $c->tipo_atual?->value,
+            $c->tipo_definido_em?->format('d/m/Y'),
             $solicitado->value,
+            $c->tipo_definido_em?->copy()->addDay()->format('d/m/Y'),
         ));
     }
 
