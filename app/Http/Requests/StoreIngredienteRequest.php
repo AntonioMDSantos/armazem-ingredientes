@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Data\EntradaData;
 use App\Enums\TipoIngrediente;
 use App\Http\Requests\Concerns\NormalizaTipo;
 use App\Http\Requests\Concerns\QuantidadeDecimal;
@@ -22,5 +23,16 @@ class StoreIngredienteRequest extends FormRequest
             'compartimentoId' => ['required', 'integer', Rule::exists('compartimentos', 'id')],
             'responsavel' => ['required', 'string', 'max:255'],
         ];
+    }
+
+    public function toEntradaData(): EntradaData
+    {
+        return new EntradaData(
+            nome: $this->validated('nome'),
+            tipo: $this->tipo(),
+            quantidade: $this->quantidade(),
+            compartimentoId: (int) $this->validated('compartimentoId'),
+            responsavel: $this->validated('responsavel'),
+        );
     }
 }

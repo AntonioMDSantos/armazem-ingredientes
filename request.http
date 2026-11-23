@@ -1,0 +1,105 @@
+@base = http://localhost:8000/api
+
+POST {{base}}/ingredientes
+Content-Type: application/json
+Accept: application/json
+
+
+{"nome":"Farinha de Trigo",
+"tipo":"SECOS",
+"quantidade":400,
+"compartimentoId":1,
+"responsavel":"pedro"}
+
+POST {{base}}/ingredientes
+Content-Type: application/json
+Accept: application/json
+
+{"nome":"Açúcar",
+"tipo":"SECO",
+"quantidade":250,
+"compartimentoId":1,
+"responsavel":"pedro"}
+
+
+POST {{base}}/ingredientes
+Content-Type: application/json
+Accept: application/json
+
+
+{"nome":"Leite",
+"tipo":"LIQUIDO",
+"quantidade":10,
+"compartimentoId":1,
+"responsavel":"pedro"}
+
+
+POST {{base}}/ingredientes
+Content-Type: application/json
+Accept: application/json
+
+{"nome":"Leite",
+"tipo":"LIQUIDO",
+"quantidade":200,
+"compartimentoId":2,
+"responsavel":"ana"}
+
+POST {{base}}/ingredientes
+Content-Type: application/json
+Accept: application/json
+
+{"nome":"Manteiga",
+"tipo":"REFRIGERADO",
+"quantidade":150,
+"compartimentoId":3,
+"responsavel":"ana"}
+
+GET {{base}}/ingredientes/volume
+
+GET {{base}}/compartimentos
+
+GET {{base}}/compartimentos/disponiveis?quantidade=100&tipo=SECO
+
+POST {{base}}/ingredientes/2/saida
+Content-Type: application/json
+Accept: application/json
+
+{"quantidade":999, "responsavel":"ana"}
+
+POST {{base}}/ingredientes/2/saida
+Content-Type: application/json
+Accept: application/json
+
+{"quantidade":200, "responsavel":"ana"}
+
+POST {{base}}/ingredientes
+Content-Type: application/json
+Accept: application/json
+
+
+{"nome":"Arroz",
+"tipo":"SECO",
+"quantidade":10,
+"compartimentoId":2,
+"responsavel":"pedro"}
+
+GET {{base}}/compartimentos/disponiveis-para-venda?tipo=LIQUIDO
+
+GET {{base}}/ingredientes
+
+GET {{base}}/ingredientes/1
+
+GET {{base}}/historico?sortBy=date&order=asc
+
+GET {{base}}/historico?sortBy=compartimento&order=asc
+
+POST {{base}}/ingredientes
+Content-Type: application/json
+Accept: application/json
+
+{"nome":"",
+"tipo":"GASOSO",
+"quantidade":0,
+"compartimentoId:"99}
+
+GET {{base}}/ingredientes/999
